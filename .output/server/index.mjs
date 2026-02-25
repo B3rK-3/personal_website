@@ -97,33 +97,19 @@ const headers = ((m) => function headersRouteRule(event) {
   }
 });
 const assets = {
+  "/Eren_s_Resume-2.pdf": {
+    "type": "application/pdf",
+    "etag": '"1e69c-kyf8p7ejw6UdTLzfjR7U3JQtOjk"',
+    "mtime": "2026-01-03T04:17:32.824Z",
+    "size": 124572,
+    "path": "../public/Eren_s_Resume-2.pdf"
+  },
   "/favicon.ico": {
     "type": "image/vnd.microsoft.icon",
     "etag": '"f1e-ESBTjHetHyiokkO0tT/irBbMO8Y"',
     "mtime": "2026-02-14T01:38:58.302Z",
     "size": 3870,
     "path": "../public/favicon.ico"
-  },
-  "/logo512.png": {
-    "type": "image/png",
-    "etag": '"25c0-RpFfnQJpTtSb/HqVNJR2hBA9w/4"',
-    "mtime": "2026-02-14T01:38:58.303Z",
-    "size": 9664,
-    "path": "../public/logo512.png"
-  },
-  "/logo192.png": {
-    "type": "image/png",
-    "etag": '"14e3-f08taHgqf6/O2oRVTsq5tImHdQA"',
-    "mtime": "2026-02-14T01:38:58.303Z",
-    "size": 5347,
-    "path": "../public/logo192.png"
-  },
-  "/robots.txt": {
-    "type": "text/plain; charset=utf-8",
-    "etag": '"43-BEzmj4PuhUNHX+oW9uOnPSihxtU"',
-    "mtime": "2026-02-14T01:38:58.304Z",
-    "size": 67,
-    "path": "../public/robots.txt"
   },
   "/manifest.json": {
     "type": "application/json",
@@ -132,12 +118,12 @@ const assets = {
     "size": 498,
     "path": "../public/manifest.json"
   },
-  "/Eren_s_Resume-2.pdf": {
-    "type": "application/pdf",
-    "etag": '"1e69c-kyf8p7ejw6UdTLzfjR7U3JQtOjk"',
-    "mtime": "2026-01-03T04:17:32.824Z",
-    "size": 124572,
-    "path": "../public/Eren_s_Resume-2.pdf"
+  "/robots.txt": {
+    "type": "text/plain; charset=utf-8",
+    "etag": '"43-BEzmj4PuhUNHX+oW9uOnPSihxtU"',
+    "mtime": "2026-02-14T01:38:58.304Z",
+    "size": 67,
+    "path": "../public/robots.txt"
   },
   "/tanstack-word-logo-white.svg": {
     "type": "image/svg+xml",
@@ -146,12 +132,26 @@ const assets = {
     "size": 15002,
     "path": "../public/tanstack-word-logo-white.svg"
   },
-  "/assets/index-CEe2mngV.js": {
+  "/logo192.png": {
+    "type": "image/png",
+    "etag": '"14e3-f08taHgqf6/O2oRVTsq5tImHdQA"',
+    "mtime": "2026-02-14T01:38:58.303Z",
+    "size": 5347,
+    "path": "../public/logo192.png"
+  },
+  "/logo512.png": {
+    "type": "image/png",
+    "etag": '"25c0-RpFfnQJpTtSb/HqVNJR2hBA9w/4"',
+    "mtime": "2026-02-14T01:38:58.303Z",
+    "size": 9664,
+    "path": "../public/logo512.png"
+  },
+  "/assets/resume-CLjrP7YA.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"2153-Gg3Xgh4LHGE1qAtj6+Wjbf0Fw60"',
-    "mtime": "2026-02-25T05:35:36.921Z",
-    "size": 8531,
-    "path": "../public/assets/index-CEe2mngV.js"
+    "etag": '"d89-puaTzpzvxlh9Vn2+oheBeeVFgG0"',
+    "mtime": "2026-02-25T05:42:50.475Z",
+    "size": 3465,
+    "path": "../public/assets/resume-CLjrP7YA.js"
   },
   "/tanstack-circle-logo.png": {
     "type": "image/png",
@@ -160,19 +160,19 @@ const assets = {
     "size": 265387,
     "path": "../public/tanstack-circle-logo.png"
   },
-  "/assets/resume-DeCtveMi.js": {
+  "/assets/secret-location-B7-heoHm.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"db4-FveBjvYtFg1hOBcFq/Mz9HEImXs"',
-    "mtime": "2026-02-25T05:35:36.921Z",
-    "size": 3508,
-    "path": "../public/assets/resume-DeCtveMi.js"
+    "etag": '"8c7e-8WXPSV9+kj15Q8v+8fQbQH+6sLU"',
+    "mtime": "2026-02-25T05:42:50.475Z",
+    "size": 35966,
+    "path": "../public/assets/secret-location-B7-heoHm.js"
   },
-  "/assets/styles-WGuyCH51.css": {
+  "/assets/styles-BKj99YxW.css": {
     "type": "text/css; charset=utf-8",
-    "etag": '"6344-MbnH1IET4+ShiZBHGcY+WTwQWNs"',
-    "mtime": "2026-02-25T05:35:36.921Z",
-    "size": 25412,
-    "path": "../public/assets/styles-WGuyCH51.css"
+    "etag": '"5506-5Ze3Zf/lPejwxtSeW8C0D/mOCFg"',
+    "mtime": "2026-02-25T05:42:50.474Z",
+    "size": 21766,
+    "path": "../public/assets/styles-BKj99YxW.css"
   },
   "/game/index.html": {
     "type": "text/html; charset=utf-8",
@@ -180,13 +180,6 @@ const assets = {
     "mtime": "2026-02-24T04:32:28.845Z",
     "size": 9994,
     "path": "../public/game/index.html"
-  },
-  "/assets/secret-location-Cj0L-Kxj.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": '"8c7e-L1/LuLaYNua13hxUNWM+rCFP2Ko"',
-    "mtime": "2026-02-25T05:35:36.921Z",
-    "size": 35966,
-    "path": "../public/assets/secret-location-Cj0L-Kxj.js"
   },
   "/game/scripts.js": {
     "type": "text/javascript; charset=utf-8",
@@ -202,19 +195,19 @@ const assets = {
     "size": 8139,
     "path": "../public/game/styles.css"
   },
-  "/assets/main-DoR9EArX.js": {
+  "/assets/portfolio-CgFZvZBQ.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"51326-k+B5N/ADlhcXsUpH0NSuUZN8ZzI"',
-    "mtime": "2026-02-25T05:35:36.921Z",
-    "size": 332582,
-    "path": "../public/assets/main-DoR9EArX.js"
-  },
-  "/assets/portfolio-6sJ6b-47.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": '"1f1d0-mnmEKWUi/YFh0lKgFiyRLYp6p0M"',
-    "mtime": "2026-02-25T05:35:36.921Z",
+    "etag": '"1f1d0-0JEnjhWxsKASKo4Z7LBiCnSioOo"',
+    "mtime": "2026-02-25T05:42:50.475Z",
     "size": 127440,
-    "path": "../public/assets/portfolio-6sJ6b-47.js"
+    "path": "../public/assets/portfolio-CgFZvZBQ.js"
+  },
+  "/assets/main-CCInto8E.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": '"51258-42QAL2/VpaStCV712T0ljBe+MxY"',
+    "mtime": "2026-02-25T05:42:50.475Z",
+    "size": 332376,
+    "path": "../public/assets/main-CCInto8E.js"
   }
 };
 function readAsset(id) {

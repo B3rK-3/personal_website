@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { r as resumeData } from "./resume-DYukLGdF.mjs";
+import { r as resumeData } from "./resume-D4OLojd1.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import "../_libs/tiny-warning.mjs";
 import "../_libs/tanstack__router-core.mjs";

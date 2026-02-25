@@ -238,8 +238,8 @@ function TerminalLoader({
     }
   );
 }
-const appCss = "/assets/styles-DJuoZJC8.css";
-const Route$3 = createRootRoute({
+const appCss = "/assets/styles-C9spP-0Z.css";
+const Route$2 = createRootRoute({
   head: () => ({
     meta: [
       {
@@ -294,39 +294,29 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter$2 = () => import("./secret-location-BJG6l4Zx.mjs");
-const Route$2 = createFileRoute("/secret-location")({
-  component: lazyRouteComponent($$splitComponentImporter$2, "component")
-});
-const $$splitComponentImporter$1 = () => import("./portfolio-CTY7vds3.mjs");
-const Route$1 = createFileRoute("/portfolio")({
+const $$splitComponentImporter$1 = () => import("./secret-location-DRNeICyi.mjs");
+const Route$1 = createFileRoute("/secret-location")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-BFqXY6kE.mjs");
-const Route = createFileRoute("/")({
+const $$splitComponentImporter = () => import("./portfolio-CdhH7lho.mjs");
+const Route = createFileRoute("/portfolio")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-const SecretLocationRoute = Route$2.update({
+const SecretLocationRoute = Route$1.update({
   id: "/secret-location",
   path: "/secret-location",
-  getParentRoute: () => Route$3
+  getParentRoute: () => Route$2
 });
-const PortfolioRoute = Route$1.update({
+const PortfolioRoute = Route.update({
   id: "/portfolio",
   path: "/portfolio",
-  getParentRoute: () => Route$3
-});
-const IndexRoute = Route.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => Route$3
+  getParentRoute: () => Route$2
 });
 const rootRouteChildren = {
-  IndexRoute,
   PortfolioRoute,
   SecretLocationRoute
 };
-const routeTree = Route$3._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$2._addFileChildren(rootRouteChildren)._addFileTypes();
 function createRouter() {
   const router2 = createRouter$1({
     routeTree,

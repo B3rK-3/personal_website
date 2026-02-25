@@ -5,8 +5,6 @@ dist-ssr
 *.local
 count.txt
 .env
-.nitro
-.tanstack
 .wrangler
 .vinxi
 __unconfig*
