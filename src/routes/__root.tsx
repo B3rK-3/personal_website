@@ -72,15 +72,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
-        {loading && <TerminalLoader onComplete={() => setLoading(false)} />}
-
-        <div
-          className={`transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
-        >
-          {children}
-        </div>
-
+      <body className="bg-black text-white min-h-screen">
+        {loading ? (
+          <TerminalLoader onComplete={() => setLoading(false)} />
+        ) : (
+          <div className="bg-black min-h-screen">{children}</div>
+        )}
         <TanStackDevtools
           config={{
             position: 'bottom-right',

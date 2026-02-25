@@ -97,40 +97,12 @@ const headers = ((m) => function headersRouteRule(event) {
   }
 });
 const assets = {
-  "/Eren_s_Resume-2.pdf": {
-    "type": "application/pdf",
-    "etag": '"1e69c-kyf8p7ejw6UdTLzfjR7U3JQtOjk"',
-    "mtime": "2026-01-03T04:17:32.824Z",
-    "size": 124572,
-    "path": "../public/Eren_s_Resume-2.pdf"
-  },
   "/favicon.ico": {
     "type": "image/vnd.microsoft.icon",
     "etag": '"f1e-ESBTjHetHyiokkO0tT/irBbMO8Y"',
     "mtime": "2026-02-14T01:38:58.302Z",
     "size": 3870,
     "path": "../public/favicon.ico"
-  },
-  "/manifest.json": {
-    "type": "application/json",
-    "etag": '"1f2-Oqn/x1R1hBTtEjA8nFhpBeFJJNg"',
-    "mtime": "2026-02-14T01:38:58.303Z",
-    "size": 498,
-    "path": "../public/manifest.json"
-  },
-  "/robots.txt": {
-    "type": "text/plain; charset=utf-8",
-    "etag": '"43-BEzmj4PuhUNHX+oW9uOnPSihxtU"',
-    "mtime": "2026-02-14T01:38:58.304Z",
-    "size": 67,
-    "path": "../public/robots.txt"
-  },
-  "/tanstack-word-logo-white.svg": {
-    "type": "image/svg+xml",
-    "etag": '"3a9a-9TQFm/pN8AZe1ZK0G1KyCEojnYg"',
-    "mtime": "2026-02-14T01:38:58.311Z",
-    "size": 15002,
-    "path": "../public/tanstack-word-logo-white.svg"
   },
   "/logo192.png": {
     "type": "image/png",
@@ -146,12 +118,40 @@ const assets = {
     "size": 9664,
     "path": "../public/logo512.png"
   },
+  "/manifest.json": {
+    "type": "application/json",
+    "etag": '"1f2-Oqn/x1R1hBTtEjA8nFhpBeFJJNg"',
+    "mtime": "2026-02-14T01:38:58.303Z",
+    "size": 498,
+    "path": "../public/manifest.json"
+  },
+  "/Eren_s_Resume-2.pdf": {
+    "type": "application/pdf",
+    "etag": '"1e69c-kyf8p7ejw6UdTLzfjR7U3JQtOjk"',
+    "mtime": "2026-01-03T04:17:32.824Z",
+    "size": 124572,
+    "path": "../public/Eren_s_Resume-2.pdf"
+  },
   "/assets/resume-CLjrP7YA.js": {
     "type": "text/javascript; charset=utf-8",
     "etag": '"d89-puaTzpzvxlh9Vn2+oheBeeVFgG0"',
-    "mtime": "2026-02-25T05:42:50.475Z",
+    "mtime": "2026-02-25T05:51:54.369Z",
     "size": 3465,
     "path": "../public/assets/resume-CLjrP7YA.js"
+  },
+  "/tanstack-word-logo-white.svg": {
+    "type": "image/svg+xml",
+    "etag": '"3a9a-9TQFm/pN8AZe1ZK0G1KyCEojnYg"',
+    "mtime": "2026-02-14T01:38:58.311Z",
+    "size": 15002,
+    "path": "../public/tanstack-word-logo-white.svg"
+  },
+  "/robots.txt": {
+    "type": "text/plain; charset=utf-8",
+    "etag": '"43-BEzmj4PuhUNHX+oW9uOnPSihxtU"',
+    "mtime": "2026-02-14T01:38:58.304Z",
+    "size": 67,
+    "path": "../public/robots.txt"
   },
   "/tanstack-circle-logo.png": {
     "type": "image/png",
@@ -160,26 +160,26 @@ const assets = {
     "size": 265387,
     "path": "../public/tanstack-circle-logo.png"
   },
-  "/assets/secret-location-B7-heoHm.js": {
+  "/assets/secret-location-DzKJbnCD.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"8c7e-8WXPSV9+kj15Q8v+8fQbQH+6sLU"',
-    "mtime": "2026-02-25T05:42:50.475Z",
+    "etag": '"8c7e-blsboxhqD4ct/cuub9M3uEcMGHE"',
+    "mtime": "2026-02-25T05:51:54.090Z",
     "size": 35966,
-    "path": "../public/assets/secret-location-B7-heoHm.js"
+    "path": "../public/assets/secret-location-DzKJbnCD.js"
+  },
+  "/assets/portfolio-BbTr9WJc.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": '"1f1d0-tRuKQHk3yWN7N610KkVwOL1CPqI"',
+    "mtime": "2026-02-25T05:51:54.369Z",
+    "size": 127440,
+    "path": "../public/assets/portfolio-BbTr9WJc.js"
   },
   "/assets/styles-BKj99YxW.css": {
     "type": "text/css; charset=utf-8",
     "etag": '"5506-5Ze3Zf/lPejwxtSeW8C0D/mOCFg"',
-    "mtime": "2026-02-25T05:42:50.474Z",
+    "mtime": "2026-02-25T05:51:54.369Z",
     "size": 21766,
     "path": "../public/assets/styles-BKj99YxW.css"
-  },
-  "/game/index.html": {
-    "type": "text/html; charset=utf-8",
-    "etag": '"270a-rtikjxsUC/tsjkuXg719igkZiMI"',
-    "mtime": "2026-02-24T04:32:28.845Z",
-    "size": 9994,
-    "path": "../public/game/index.html"
   },
   "/game/scripts.js": {
     "type": "text/javascript; charset=utf-8",
@@ -195,19 +195,19 @@ const assets = {
     "size": 8139,
     "path": "../public/game/styles.css"
   },
-  "/assets/portfolio-CgFZvZBQ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": '"1f1d0-0JEnjhWxsKASKo4Z7LBiCnSioOo"',
-    "mtime": "2026-02-25T05:42:50.475Z",
-    "size": 127440,
-    "path": "../public/assets/portfolio-CgFZvZBQ.js"
+  "/game/index.html": {
+    "type": "text/html; charset=utf-8",
+    "etag": '"270a-rtikjxsUC/tsjkuXg719igkZiMI"',
+    "mtime": "2026-02-24T04:32:28.845Z",
+    "size": 9994,
+    "path": "../public/game/index.html"
   },
-  "/assets/main-CCInto8E.js": {
+  "/assets/main-o5rvjkot.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"51258-42QAL2/VpaStCV712T0ljBe+MxY"',
-    "mtime": "2026-02-25T05:42:50.475Z",
-    "size": 332376,
-    "path": "../public/assets/main-CCInto8E.js"
+    "etag": '"51245-DQvALomuq+0jSD//MP9rBJz6tXc"',
+    "mtime": "2026-02-25T05:51:54.090Z",
+    "size": 332357,
+    "path": "../public/assets/main-o5rvjkot.js"
   }
 };
 function readAsset(id) {

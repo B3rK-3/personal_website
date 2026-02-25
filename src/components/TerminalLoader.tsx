@@ -39,7 +39,7 @@ export default function TerminalLoader({
             onComplete()
             navigate({ to: '/secret-location' } as any)
           }
-        }, 800)
+        }, 500)
       }
     }
 
@@ -196,16 +196,14 @@ export default function TerminalLoader({
       // Completion
       if (!aborted.current && mounted.current) {
         setIsVisible(false) // Trigger fade out
-        setTimeout(() => {
-          if (mounted.current) {
-            // Only navigate to /portfolio if we're on the home page
-            const currentPath = window.location.pathname
-            if (currentPath === '/' || currentPath === '') {
-              navigate({ to: '/portfolio' } as any)
-            }
-            onComplete()
+        if (mounted.current) {
+          // Only navigate to /portfolio if we're on the home page
+          const currentPath = window.location.pathname
+          if (currentPath === '/' || currentPath === '') {
+            navigate({ to: '/portfolio' } as any)
           }
-        }, 500) // Wait for fade out
+          onComplete()
+        }
       }
     }
 
