@@ -42,12 +42,20 @@ export const Route = createRootRoute({
         content: '/logo.png',
       },
       {
+        name: 'og:url',
+        content: 'https://www.linkedin.com/in/eren-b-dogan/',
+      },
+      {
         name: 'og:type',
         content: 'website',
       },
       {
         name: 'twitter:card',
         content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:url',
+        content: 'https://www.linkedin.com/in/eren-b-dogan/',
       },
       {
         name: 'twitter:title',
