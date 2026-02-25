@@ -43,7 +43,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:url',
-        content: 'https://www.linkedin.com/in/eren-b-dogan/',
+        content: 'https://berke.disent.com',
       },
       {
         property: 'og:type',
@@ -55,7 +55,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:url',
-        content: 'https://www.linkedin.com/in/eren-b-dogan/',
+        content: 'https://berke.disent.com',
       },
       {
         name: 'twitter:title',
