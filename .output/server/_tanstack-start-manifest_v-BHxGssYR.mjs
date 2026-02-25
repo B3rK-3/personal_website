@@ -1,0 +1,4 @@
+const tsrStartManifest = () => ({ "routes": { "__root__": { "filePath": "D:/Projects/Personal_website/webweb1/src/routes/__root.tsx", "children": ["/", "/portfolio", "/secret-location"], "preloads": ["/assets/main-DoR9EArX.js"], "assets": [] }, "/": { "filePath": "D:/Projects/Personal_website/webweb1/src/routes/index.tsx", "assets": [], "preloads": ["/assets/index-CEe2mngV.js", "/assets/resume-DeCtveMi.js"] }, "/portfolio": { "filePath": "D:/Projects/Personal_website/webweb1/src/routes/portfolio.tsx", "assets": [], "preloads": ["/assets/portfolio-6sJ6b-47.js", "/assets/resume-DeCtveMi.js"] }, "/secret-location": { "filePath": "D:/Projects/Personal_website/webweb1/src/routes/secret-location.tsx", "assets": [], "preloads": ["/assets/secret-location-Cj0L-Kxj.js", "/assets/resume-DeCtveMi.js"] } }, "clientEntry": "/assets/main-DoR9EArX.js" });
+export {
+  tsrStartManifest
+};
