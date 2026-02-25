@@ -38,7 +38,7 @@ export default function InteractiveTerminal() {
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
   const [commandHistory, setCommandHistory] = useState<Array<string>>([])
 
-  const [matrixPaused, setMatrixPaused] = useState(false)
+  const [matrixPaused] = useState(false)
   const matrixRef = useRef<MatrixRainHandle>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
 
@@ -94,6 +94,7 @@ export default function InteractiveTerminal() {
           const response = await getHighscores({
             data: { currentScore: score },
           })
+          console.log('Highscores response:', response)
 
           // Post back
           const iframe = document.querySelector(
@@ -615,12 +616,11 @@ export default function InteractiveTerminal() {
         </div>
       </div>
       <div className="mt-8 pt-4 border-t border-green-900/30 text-[10px] uppercase tracking-widest text-green-700/80 flex justify-between select-none font-bold">
-            <span>
-              Tip: use 'vim [file]' to create and './[file]' to run BASIC
-              scripts
-            </span>
-            <span>OS: BerK-Terminal-v1.0.0</span>
-          </div>
+        <span>
+          Tip: use 'vim [file]' to create and './[file]' to run BASIC scripts
+        </span>
+        <span>OS: BerK-Terminal-v1.0.0</span>
+      </div>
     </div>
   )
 }

@@ -23,13 +23,53 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Berked - Portfolio',
+      },
+      {
+        name: 'description',
+        content: 'this.portfolio. ps: go to /secret-location and type "play"',
+      },
+      {
+        name: 'og:title',
+        content: 'Berked - Portfolio',
+      },
+      {
+        name: 'og:description',
+        content: 'this.portfolio. ps: go to /secret-location and type "play"',
+      },
+      {
+        name: 'og:image',
+        content: '/logo.png',
+      },
+      {
+        name: 'og:type',
+        content: 'website',
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Berked - Portfolio',
+      },
+      {
+        name: 'twitter:description',
+        content: 'this.portfolio. ps: go to /secret-location and type "play"',
+      },
+      {
+        name: 'twitter:image',
+        content: '/logo.png',
       },
     ],
     links: [
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      {
+        rel: 'icon',
+        href: '/image0.png',
       },
     ],
   }),

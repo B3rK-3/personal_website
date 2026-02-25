@@ -1172,6 +1172,14 @@ function renderLeaderboard(scores, playerRank) {
 
   leaderboardList.innerHTML = ''
 
+  if (!scores || !Array.isArray(scores)) {
+    const errorEl = document.createElement('li')
+    errorEl.style.color = 'var(--ctp-red)'
+    errorEl.textContent = 'Unable to load scores'
+    leaderboardList.appendChild(errorEl)
+    return
+  }
+
   let tempScores = [...scores]
   let userInTop5 = false
 
