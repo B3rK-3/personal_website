@@ -23,7 +23,7 @@ const NAV_GUTTER_HALF = ITEM_HEIGHT / 2 // 40px
 // A width of ~280px usually fits 3xl with 0.3em tracking perfectly.
 const MAX_TEXT_WIDTH = 280
 
-const SNAP_SPRING = { type: 'spring' as const, stiffness: 180, damping: 28 }
+const SNAP_SPRING = { type: 'spring' as const, stiffness: 200, damping: 28 }
 
 // Helper for safe modulo on negative numbers
 const wrapIndex = (idx: number, length: number) =>
@@ -33,30 +33,30 @@ const wrapIndex = (idx: number, length: number) =>
 export default function SpatialGUI() {
   // activeIndex is now boundless (can go infinite back and forth)
   const [activeIndex, setActiveIndex] = useState(0)
-  const scrollLock = useRef(false)
 
   const navigate = useCallback((dir: 1 | -1) => {
-    if (scrollLock.current) return
     setActiveIndex((prev) => {
-      const next = prev + dir
-      scrollLock.current = true
-      setTimeout(() => (scrollLock.current = false), 600)
-      return next
+      return prev + dir
     })
   }, [])
 
   const goToAbsolute = useCallback((idx: number) => {
-    if (scrollLock.current) return
-    scrollLock.current = true
-    setTimeout(() => (scrollLock.current = false), 600)
     setActiveIndex(idx)
   }, [])
 
   // ── Wheel ──
   useEffect(() => {
+    let lastWheelTime = 0
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
-      if (e.deltaY === 0) return
+
+      // Require a meaningful scroll threshold to ignore tiny trackpad nudges
+      if (Math.abs(e.deltaY) < 3) return
+
+      const now = Date.now()
+      if (now - lastWheelTime < 150) return
+      lastWheelTime = now
+
       navigate(e.deltaY > 0 ? 1 : -1)
     }
     window.addEventListener('wheel', onWheel, { passive: false })
@@ -274,7 +274,7 @@ function ContentStage({ activeIndex }: { activeIndex: number }) {
     <div className="relative h-full w-full">
       {/* 80vh Masked Gate */}
       <div
-        className="absolute left-0 w-[94%] border-t border-b border-white overflow-hidden"
+        className="absolute left-0 w-[calc(100%-calc(var(--spacing)*12))] border-t border-b border-white overflow-hidden"
         style={{ top: '10%', height: '80%' }}
       >
         {/* The translating carousel track inside the 80vh gate */}

@@ -77,7 +77,7 @@ export const Route = createRootRoute({
       },
       {
         rel: 'icon',
-        href: '/image0.png',
+        href: 'https://berked.dev/favicon.ico',
       },
     ],
   }),
