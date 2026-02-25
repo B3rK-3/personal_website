@@ -30,23 +30,23 @@ export const Route = createRootRoute({
         content: 'this.portfolio. ps: go to /secret-location and type "play"',
       },
       {
-        name: 'og:title',
+        property: 'og:title',
         content: 'Berked - Portfolio',
       },
       {
-        name: 'og:description',
+        property: 'og:description',
         content: 'this.portfolio. ps: go to /secret-location and type "play"',
       },
       {
-        name: 'og:image',
-        content: '/logo.png',
+        property: 'og:image',
+        content: 'https://berked.dev/logo.png',
       },
       {
-        name: 'og:url',
+        property: 'og:url',
         content: 'https://www.linkedin.com/in/eren-b-dogan/',
       },
       {
-        name: 'og:type',
+        property: 'og:type',
         content: 'website',
       },
       {
@@ -67,7 +67,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:image',
-        content: '/logo.png',
+        content: 'https://berked.dev/logo.png',
       },
     ],
     links: [
