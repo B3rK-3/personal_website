@@ -1,0 +1,99 @@
+import {
+  HeadContent,
+  Scripts,
+  createRootRoute,
+  useLocation,
+} from '@tanstack/react-router'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackDevtools } from '@tanstack/react-devtools'
+
+import { useState } from 'react'
+import TerminalLoader from '../components/TerminalLoader'
+
+import appCss from '../styles.css?url'
+
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        charSet: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        title: 'TanStack Start Starter',
+      },
+    ],
+    links: [
+      {
+        rel: 'stylesheet',
+        href: appCss,
+      },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+
+  const [loading, setLoading] = useState(() => {
+    if (
+      location.pathname === '/portfolio' ||
+      location.pathname.startsWith('/portfolio') ||
+      location.pathname === '/secret-location' ||
+      location.pathname.startsWith('/secret-location')
+    ) {
+      return false
+    }
+
+    // Only run on client for search params if needed, or use location.search if schema is known
+    // For now, client-side check for bypass ensures functionality there
+    if (typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search)
+      if (searchParams.get('bypass') === '1') {
+        return false
+      }
+    }
+
+    // Check if location.search has bypass (if available on server context)
+    // Note: location.search is typically an object in TanStack Router
+    if ((location.search as any)?.bypass === '1') {
+      return false
+    }
+
+    return true
+  })
+
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {loading && <TerminalLoader onComplete={() => setLoading(false)} />}
+
+        <div
+          className={`transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
+        >
+          {children}
+        </div>
+
+        <TanStackDevtools
+          config={{
+            position: 'bottom-right',
+          }}
+          plugins={[
+            {
+              name: 'Tanstack Router',
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}

@@ -1,0 +1,7 @@
+src/components/Header.tsx(20,17): error TS2322: Type '"/"' is not assignable to type '"/secret-location" | "/portfolio" | ".." | "."'.
+src/components/Header.tsx(48,13): error TS2322: Type '"/"' is not assignable to type '"/secret-location" | "/portfolio" | ".." | "."'.
+src/components/Terminal/InteractiveTerminal.tsx(30,24): error TS6133: 'setMatrixPaused' is declared but its value is never read.
+src/components/Terminal/readModes.tsx(61,17): error TS2339: Property 'focus' does not exist on type 'Element'.
+src/components/Terminal/readModes.tsx(62,30): error TS2339: Property 'contentWindow' does not exist on type 'Element'.
+src/components/Terminal/readModes.tsx(63,18): error TS2339: Property 'contentWindow' does not exist on type 'Element'.
+src/components/Terminal/useGameManager.tsx(64,26): error TS2339: Property 'contentWindow' does not exist on type 'Element'.
