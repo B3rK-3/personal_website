@@ -23,7 +23,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'Berked - Portfolio',
+        title: 'Berke - Portfolio',
       },
       {
         name: 'description',
@@ -39,7 +39,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:image',
-        content: 'https://berked.dev/logo.png',
+        content: 'https://berked.dev/image.png',
       },
       {
         property: 'og:url',
@@ -67,7 +67,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:image',
-        content: 'https://berked.dev/logo.png',
+        content: 'https://berked.dev/image.png',
       },
     ],
     links: [
