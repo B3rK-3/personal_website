@@ -238,7 +238,7 @@ function TerminalLoader({
     }
   );
 }
-const appCss = "/assets/styles-WGuyCH51.css";
+const appCss = "/assets/styles-DJuoZJC8.css";
 const Route$3 = createRootRoute({
   head: () => ({
     meta: [
@@ -294,7 +294,7 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter$2 = () => import("./secret-location-B8OoMg6K.mjs");
+const $$splitComponentImporter$2 = () => import("./secret-location-BJG6l4Zx.mjs");
 const Route$2 = createFileRoute("/secret-location")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
