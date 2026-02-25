@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SecretLocationRouteImport } from './routes/secret-location'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as IndexRouteImport } from './routes/index'
 
 const SecretLocationRoute = SecretLocationRouteImport.update({
   id: '/secret-location',
@@ -22,29 +23,38 @@ const PortfolioRoute = PortfolioRouteImport.update({
   path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/portfolio' | '/secret-location'
+  fullPaths: '/' | '/portfolio' | '/secret-location'
   fileRoutesByTo: FileRoutesByTo
-  to: '/portfolio' | '/secret-location'
-  id: '__root__' | '/portfolio' | '/secret-location'
+  to: '/' | '/portfolio' | '/secret-location'
+  id: '__root__' | '/' | '/portfolio' | '/secret-location'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   PortfolioRoute: typeof PortfolioRoute
   SecretLocationRoute: typeof SecretLocationRoute
 }
@@ -65,10 +75,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   PortfolioRoute: PortfolioRoute,
   SecretLocationRoute: SecretLocationRoute,
 }

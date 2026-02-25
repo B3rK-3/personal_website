@@ -43,7 +43,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:url',
-        content: 'https://berke.disent.com',
+        content: 'https://berked.dev',
       },
       {
         property: 'og:type',
@@ -55,7 +55,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:url',
-        content: 'https://berke.disent.com',
+        content: 'https://berked.dev',
       },
       {
         name: 'twitter:title',
