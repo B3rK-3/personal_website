@@ -73,7 +73,7 @@ export default function VimEditor({
   }
   
   return (
-    <div className="border border-gray-600 bg-black min-h-[400px] flex flex-col font-mono">
+    <div className="border border-gray-600 bg-black min-h-[50vh] md:min-h-[400px] flex flex-col font-mono">
       <div className="flex-1 p-2 overflow-y-auto">
         <textarea
           ref={textareaRef}

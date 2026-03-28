@@ -120,7 +120,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-black text-white min-h-screen">
+      <body className="bg-black text-white min-h-screen overflow-x-hidden">
         {loading ? (
           <TerminalLoader onComplete={() => setLoading(false)} />
         ) : (

@@ -60,7 +60,9 @@ export default function InteractiveTerminal() {
 
   // Auto-scroll
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Behavior auto is more reliable on mobile to ensure the input/prompt
+    // is immediately visible after the keyboard shifts and layout stabilizes.
+    bottomRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
   }, [history])
 
   // Game scores handling
@@ -494,12 +496,12 @@ export default function InteractiveTerminal() {
   // --- Render ---
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono p-4 flex flex-col items-center">
+    <div className="min-h-full bg-black text-green-500 font-mono p-4 flex flex-col items-center">
       {/* Header ASCII */}
-      <pre className="text-[4px] sm:text-[6px] md:text-[8px] leading-none mb-8 text-green-700 select-none hidden sm:block whitespace-pre-wrap w-fit">
+      <pre className="text-[4px] sm:text-[6px] md:text-[8px] leading-none mb-8 text-green-700 select-none hidden sm:block whitespace-pre-wrap w-fit max-w-full overflow-x-auto">
         {ASCII_ART}
       </pre>
-      <div className="min-w-2xl w-4xl block flex flex-start">
+      <div className="w-full max-w-4xl flex flex-col items-start">
         {/* Terminal Output */}
         <div className="w-full">
           <div className="opacity-70 mb-6">
@@ -526,7 +528,7 @@ export default function InteractiveTerminal() {
                       <span className="text-green-500 mr-2 shrink-0">
                         {`${profile}:${entry.path ?? currentPath}$`}
                       </span>
-                      <span className="text-white break-all font-bold">
+                      <span className="text-white break-words font-bold">
                         {entry.content}
                       </span>
                     </div>
