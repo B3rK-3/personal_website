@@ -66,9 +66,7 @@ export function useGameManager({
     let cleanup: (() => void) | null = null
 
     const attach = () => {
-      const iframe = document.querySelector(
-        'iframe[title="ASCIItron Game"]',
-      ) as HTMLIFrameElement | null
+      const iframe = document.querySelector('iframe[title="ASCIItron Game"]')
       const cw = iframe?.contentWindow
       if (cw) {
         cw.addEventListener('keydown', handler)
@@ -94,9 +92,7 @@ export function useGameManager({
     if (!gameRunning) return
 
     const sendNickname = () => {
-      const iframe = document.querySelector(
-        'iframe[title="ASCIItron Game"]',
-      ) as HTMLIFrameElement | null
+      const iframe = document.querySelector('iframe[title="ASCIItron Game"]')
       const cw = iframe?.contentWindow
       if (cw) {
         cw.postMessage(

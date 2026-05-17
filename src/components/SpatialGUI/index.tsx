@@ -1,9 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import resumeData from '../../data/resume.json'
 
-// ─── Data ───────────────────────────────────────────────────────────────────
 const data = resumeData as any
 
 const NAV_ITEMS = [
@@ -15,15 +13,14 @@ const NAV_ITEMS = [
 ] as const
 type NavItem = (typeof NAV_ITEMS)[number]
 
-// Physics & Dimensions
-const ITEM_HEIGHT = 80 // height for each nav slot (desktop)
-const ITEM_WIDTH = 160 // width for each nav slot (mobile)
-const NAV_GUTTER_HALF = ITEM_HEIGHT / 2 // 40px
-const NAV_GUTTER_HALF_X = ITEM_WIDTH / 2 // 80px
+const ITEM_HEIGHT = 80
+const ITEM_WIDTH = 160
+const NAV_GUTTER_HALF = ITEM_HEIGHT / 2
+const NAV_GUTTER_HALF_X = ITEM_WIDTH / 2
 
-const SNAP_SPRING = { type: 'spring' as const, stiffness: 200, damping: 28 }
+const SNAP_EASING = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+const SNAP_DURATION = '0.35s'
 
-// Helper for safe modulo on negative numbers
 const wrapIndex = (idx: number, length: number) =>
   ((idx % length) + length) % length
 
@@ -60,7 +57,8 @@ export default function SpatialGUI() {
   useEffect(() => {
     let lastWheelTime = 0
     const canScrollVertically = (el: Element | null): boolean => {
-      if (!el || el === document.body || el === document.documentElement) return false
+      if (!el || el === document.body || el === document.documentElement)
+        return false
       if (el.scrollHeight > el.clientHeight) {
         const atTop = el.scrollTop <= 0
         const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
@@ -75,7 +73,10 @@ export default function SpatialGUI() {
       if (isMobile) {
         const target = e.target as Element
 
-        if (target.closest('.nav-wheel-area') || target.closest('.nav-gutter-area')) {
+        if (
+          target.closest('.nav-wheel-area') ||
+          target.closest('.nav-gutter-area')
+        ) {
           return
         }
 
@@ -101,7 +102,9 @@ export default function SpatialGUI() {
       lastWheelTime = now
 
       const delta = isMobile
-        ? (absX > absY * 2 ? e.deltaX : e.deltaY)
+        ? absX > absY * 2
+          ? e.deltaX
+          : e.deltaY
         : e.deltaY
 
       navigate(delta > 0 ? 1 : -1)
@@ -136,7 +139,10 @@ export default function SpatialGUI() {
     const onTouchEnd = (e: TouchEvent) => {
       if (!touchStart.current) return
       const touchTarget = e.target as Element
-      if (touchTarget.closest('.nav-wheel-area') || touchTarget.closest('.nav-gutter-area')) {
+      if (
+        touchTarget.closest('.nav-wheel-area') ||
+        touchTarget.closest('.nav-gutter-area')
+      ) {
         touchStart.current = null
         return
       }
@@ -230,8 +236,14 @@ export default function SpatialGUI() {
         </div>
 
         {/* ── Vertical Stack: Nav → Gutter → Content ── */}
-        <div className="grid grid-rows-[5%_8%_87%] h-full w-full relative" style={{ paddingTop: '80px', paddingBottom: '40px' }}>
-          <NavigationWheelMobile activeIndex={activeIndex} onSelect={goToAbsolute} />
+        <div
+          className="grid grid-rows-[5%_8%_87%] h-full w-full relative"
+          style={{ paddingTop: '80px', paddingBottom: '40px' }}
+        >
+          <NavigationWheelMobile
+            activeIndex={activeIndex}
+            onSelect={goToAbsolute}
+          />
           <GeometricGutterMobile />
           <ContentStageMobile activeIndex={activeIndex} />
         </div>
@@ -306,7 +318,6 @@ export default function SpatialGUI() {
 // DESKTOP COMPONENTS (original, unchanged)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// ─── Navigation Wheel (Left 30%, Desktop) ───────────────────────────────────
 function NavigationWheel({
   activeIndex,
   onSelect,
@@ -319,7 +330,6 @@ function NavigationWheel({
   const scaleWithDist = [1, 0.85, 0.6, 0.5, 0.2]
   return (
     <div className="relative h-full w-full flex flex-col items-end justify-center overflow-hidden">
-      {/* Static Nav Borders wrapping the active slot */}
       <div
         className="absolute pointer-events-none border-t border-b border-white z-20"
         style={{
@@ -329,15 +339,17 @@ function NavigationWheel({
         }}
       />
 
-      {/* The scrolling track */}
       <div
         className="absolute top-1/2 left-10 w-full"
         style={{ transform: 'translateY(-50%)' }}
       >
-        <motion.div
+        <div
           className="relative w-full"
-          animate={{ y: -activeIndex * ITEM_HEIGHT - ITEM_HEIGHT / 2 }}
-          transition={SNAP_SPRING}
+          style={{
+            transform: `translate3d(0, ${-activeIndex * ITEM_HEIGHT - ITEM_HEIGHT / 2}px, 0)`,
+            willChange: 'transform',
+            transition: `transform ${SNAP_DURATION} ${SNAP_EASING}`,
+          }}
         >
           {windowRange.map((absIdx) => {
             const wrappedIdx = wrapIndex(absIdx, NAV_ITEMS.length)
@@ -348,13 +360,17 @@ function NavigationWheel({
             const scale = scaleWithDist[dist]
 
             return (
-              <motion.div
+              <div
                 key={absIdx}
                 className="absolute w-full flex items-center justify-center cursor-pointer"
-                style={{ top: absIdx * ITEM_HEIGHT, height: ITEM_HEIGHT }}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ opacity, scale }}
-                transition={SNAP_SPRING}
+                style={{
+                  top: absIdx * ITEM_HEIGHT,
+                  height: ITEM_HEIGHT,
+                  opacity,
+                  transform: `scale(${scale})`,
+                  willChange: 'transform, opacity',
+                  transition: `opacity ${SNAP_DURATION} ${SNAP_EASING}, transform ${SNAP_DURATION} ${SNAP_EASING}`,
+                }}
                 onClick={() => onSelect(absIdx)}
               >
                 <span
@@ -364,10 +380,10 @@ function NavigationWheel({
                 >
                   {item}
                 </span>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </div>
   )
@@ -429,16 +445,17 @@ function ContentStage({ activeIndex }: { activeIndex: number }) {
 
   return (
     <div className="relative h-full w-full">
-      {/* 80vh Masked Gate */}
       <div
         className="absolute left-0 w-[calc(100%-calc(var(--spacing)*12))] border-t border-b border-white overflow-hidden"
         style={{ top: '10%', height: '80%' }}
       >
-        {/* The translating carousel track inside the 80vh gate */}
-        <motion.div
+        <div
           className="relative w-full h-full"
-          animate={{ y: `${-activeIndex * 100}%` }}
-          transition={SNAP_SPRING}
+          style={{
+            transform: `translate3d(0, ${-activeIndex * 100}%, 0)`,
+            willChange: 'transform',
+            transition: `transform ${SNAP_DURATION} ${SNAP_EASING}`,
+          }}
         >
           {windowRange.map((absIdx) => {
             const wrappedIdx = wrapIndex(absIdx, NAV_ITEMS.length)
@@ -456,7 +473,7 @@ function ContentStage({ activeIndex }: { activeIndex: number }) {
               </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </div>
   )
@@ -480,7 +497,6 @@ function NavigationWheelMobile({
 
   return (
     <div className="relative h-full w-full flex items-center justify-center overflow-hidden nav-wheel-area">
-      {/* Static borders: left/right around the active slot */}
       <div
         className="absolute pointer-events-none border-l border-r border-white z-20 bottom-0"
         style={{
@@ -490,15 +506,17 @@ function NavigationWheelMobile({
         }}
       />
 
-      {/* Horizontal scrolling track */}
       <div
         className="absolute left-1/2 top-0 h-full"
         style={{ transform: 'translateX(-50%)' }}
       >
-        <motion.div
+        <div
           className="relative h-full"
-          animate={{ x: -activeIndex * ITEM_WIDTH - ITEM_WIDTH / 2 }}
-          transition={SNAP_SPRING}
+          style={{
+            transform: `translate3d(${-activeIndex * ITEM_WIDTH - ITEM_WIDTH / 2}px, 0, 0)`,
+            willChange: 'transform',
+            transition: `transform ${SNAP_DURATION} ${SNAP_EASING}`,
+          }}
         >
           {windowRange.map((absIdx) => {
             const wrappedIdx = wrapIndex(absIdx, NAV_ITEMS.length)
@@ -509,13 +527,17 @@ function NavigationWheelMobile({
             const scale = scaleWithDist[dist] ?? 0.2
 
             return (
-              <motion.div
+              <div
                 key={absIdx}
                 className="absolute h-full flex items-center justify-center cursor-pointer"
-                style={{ left: absIdx * ITEM_WIDTH, width: ITEM_WIDTH }}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ opacity, scale }}
-                transition={SNAP_SPRING}
+                style={{
+                  left: absIdx * ITEM_WIDTH,
+                  width: ITEM_WIDTH,
+                  opacity,
+                  transform: `scale(${scale})`,
+                  willChange: 'transform, opacity',
+                  transition: `opacity ${SNAP_DURATION} ${SNAP_EASING}, transform ${SNAP_DURATION} ${SNAP_EASING}`,
+                }}
                 onClick={() => onSelect(absIdx)}
               >
                 <span
@@ -525,10 +547,10 @@ function NavigationWheelMobile({
                 >
                   {item}
                 </span>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </div>
   )
@@ -600,16 +622,17 @@ function ContentStageMobile({ activeIndex }: { activeIndex: number }) {
 
   return (
     <div className="relative h-full w-full">
-      {/* Masked Gate with left/right borders */}
       <div
         className="absolute top-0 h-full border-l border-r border-white overflow-hidden"
         style={{ left: contentPadding, right: contentPadding }}
       >
-        {/* Horizontal translating carousel */}
-        <motion.div
+        <div
           className="relative w-full h-full"
-          animate={{ x: `${-activeIndex * 100}%` }}
-          transition={SNAP_SPRING}
+          style={{
+            transform: `translate3d(${-activeIndex * 100}%, 0, 0)`,
+            willChange: 'transform',
+            transition: `transform ${SNAP_DURATION} ${SNAP_EASING}`,
+          }}
         >
           {windowRange.map((absIdx) => {
             const wrappedIdx = wrapIndex(absIdx, NAV_ITEMS.length)
@@ -621,13 +644,19 @@ function ContentStageMobile({ activeIndex }: { activeIndex: number }) {
                 className="absolute top-0 h-full flex items-start"
                 style={{ left: `${absIdx * 100}%`, width: '100%' }}
               >
-                <div className="w-full overflow-y-auto max-h-full scrollbar-hide p-4 pt-4" style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }}>
+                <div
+                  className="w-full overflow-y-auto max-h-full scrollbar-hide p-4 pt-4"
+                  style={{
+                    overscrollBehavior: 'contain',
+                    touchAction: 'pan-y',
+                  }}
+                >
                   <SectionContent section={item} />
                 </div>
               </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </div>
   )
@@ -676,31 +705,109 @@ function HomeContent() {
 }
 
 function ExperienceContent() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [positions, setPositions] = useState<
+    Array<{ x: number; y: number; src: string; name: string; size: number }>
+  >([])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const logos = [
+      { src: '/logos/betterment.png', name: 'Betterment' },
+      { src: '/logos/disent.png', name: 'Disent' },
+      { src: '/logos/nasa.png', name: 'NASA' },
+      { src: '/logos/princeton.png', name: 'Princeton' },
+      { src: '/logos/xulab.png', name: 'XU Lab' },
+      { src: '/logos/yale.png', name: 'Yale' },
+    ]
+
+    const ro = new ResizeObserver((entries) => {
+      const rect = entries[0].contentRect
+      const w = rect.width
+      const h = rect.height
+
+      // Don't calculate if the container is too small or invisible
+      if (w < 50 || h < 50) return
+
+      const isMobile = w < 600
+      const size = isMobile ? 100 : 220 // logo size bounds
+      const padding = 15
+
+      const newPositions: Array<{
+        x: number
+        y: number
+        src: string
+        name: string
+        size: number
+      }> = []
+
+      // Determine grid dimensions based on container aspect ratio
+      const cols = w > 600 ? 3 : 2
+      const rows = cols === 3 ? 2 : 3
+      const cellW = w / cols
+      const cellH = h / rows
+
+      // Shuffle logos for a randomized distribution pattern
+      const shuffledLogos = [...logos].sort(() => Math.random() - 0.5)
+
+      shuffledLogos.forEach((logo, index) => {
+        const col = index % cols
+        const row = Math.floor(index / cols)
+
+        // Calculate safe boundaries within the cell for the logo
+        const minX = col * cellW + padding
+        const maxX = col * cellW + cellW - size - padding
+        const minY = row * cellH + padding
+        const maxY = row * cellH + cellH - size - padding
+
+        let x = minX
+        let y = minY
+
+        // Random jitter within the cell if space permits
+        if (maxX > minX) {
+          x = minX + Math.random() * (maxX - minX)
+        } else {
+          // If cell is too small, center it
+          x = col * cellW + (cellW - size) / 2
+        }
+
+        if (maxY > minY) {
+          y = minY + Math.random() * (maxY - minY)
+        } else {
+          y = row * cellH + (cellH - size) / 2
+        }
+
+        newPositions.push({ x, y, src: logo.src, name: logo.name, size })
+      })
+      setPositions(newPositions)
+    })
+
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [])
+
   return (
-    <div className="space-y-6">
-      {data.experience.map((exp: any, idx: number) => (
-        <div key={idx}>
-          <div className="flex items-baseline justify-between mb-1 flex-wrap gap-1">
-            <h3 className="text-lg max-[800px]:text-base font-bold text-white uppercase tracking-wide">
-              {exp.role}
-            </h3>
-            <span className="text-[13px] max-[800px]:text-[11px] text-zinc-600 tracking-wider whitespace-nowrap ml-4 max-[800px]:ml-0">
-              {exp.startDate} — {exp.endDate}
-            </span>
-          </div>
-          <p className="text-[13px] text-zinc-600 mb-2 tracking-wider">
-            {exp.company} · {exp.location}
-          </p>
-          <ul className="space-y-1">
-            {exp.highlights.map((h: string, hIdx: number) => (
-              <li
-                key={hIdx}
-                className="text-zinc-500 text-[14px] max-[800px]:text-[12px] leading-relaxed pl-3 border-l border-zinc-800"
-              >
-                {h}
-              </li>
-            ))}
-          </ul>
+    <div
+      className="h-full w-full min-h-[60vh] relative overflow-hidden"
+      ref={containerRef}
+    >
+      {positions.map((pos, i) => (
+        <div
+          key={i}
+          className="absolute flex items-center justify-center transition-all duration-300 hover:scale-110 hover:z-20 cursor-default"
+          style={{
+            left: pos.x,
+            top: pos.y,
+            width: pos.size,
+            height: pos.size,
+          }}
+        >
+          <img
+            src={pos.src}
+            alt={pos.name}
+            className="max-w-full max-h-full object-contain rounded-2xl transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+            draggable={false}
+          />
         </div>
       ))}
     </div>
@@ -735,43 +842,24 @@ function ProjectsContent() {
 }
 
 function ResearchContent() {
-  const researchExp = data.experience.find(
-    (e: any) => e.companyType === 'Research',
-  )
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg max-[800px]:text-base font-bold uppercase tracking-wide">
-        Academic Research
+    <div className="h-full w-full min-h-[60vh] flex flex-col items-center justify-center space-y-6">
+      <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-zinc-400">
+        Google Scholar
       </h3>
-      {researchExp && (
-        <div className="border-l border-zinc-800 pl-4">
-          <p className="text-[13px] text-zinc-600 tracking-wider mb-2">
-            {researchExp.company} · {researchExp.startDate} —{' '}
-            {researchExp.endDate}
-          </p>
-          <ul className="space-y-1">
-            {researchExp.highlights.map((h: string, i: number) => (
-              <li
-                key={i}
-                className="text-zinc-500 text-[14px] max-[800px]:text-[12px] leading-relaxed pl-3 border-l border-zinc-800"
-              >
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <div className="mt-4">
-        <h4 className="text-md text-white uppercase tracking-widest mb-2">
-          Awards & Publications
-        </h4>
-        {data.awardsAndLeadership.map((a: any, i: number) => (
-          <p key={i} className="text-zinc-500 text-[14px] max-[800px]:text-[12px] leading-relaxed mb-1">
-            <span className="text-gray-300 font-bold">{a.title}:</span>{' '}
-            {a.description}
-          </p>
-        ))}
-      </div>
+      <a
+        href="https://scholar.google.com/citations?hl=en&user=P399EVAAAAAJ&view_op=list_works&authuser=2"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] rounded-2xl"
+      >
+        <img
+          src="/logos/scholar.png"
+          alt="Google Scholar"
+          className="w-48 h-48 md:w-64 md:h-64 object-contain rounded-2xl drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] bg-white p-4"
+          draggable={false}
+        />
+      </a>
     </div>
   )
 }

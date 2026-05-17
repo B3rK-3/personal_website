@@ -59,9 +59,7 @@ export const readModes: Record<string, ReadModeDef> = {
       helpers.setGameRunning(true)
 
       setTimeout(() => {
-        const iframe = document.querySelector(
-          'iframe[title="ASCIItron Game"]',
-        ) as HTMLIFrameElement | null
+        const iframe = document.querySelector('iframe[title="ASCIItron Game"]')
         iframe?.focus()
       }, 150)
 

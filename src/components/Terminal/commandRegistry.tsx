@@ -36,15 +36,14 @@ Courses: ${edu.courses.join(', ')}
 }
 
 function formatExperience(expList: typeof resumeData.experience) {
-  return expList
-    .map(
-      (exp) => `${exp.role} @ ${exp.company}
-[ ${exp.startDate} - ${exp.endDate} ]
-${exp.companyType} — ${exp.location}
-${exp.highlights.map((h) => `- ${h}`).join('\n')}
-`,
-    )
-    .join('\n')
+  return `COMPANIES WORKED WITH:
+  - Disent (Software Engineer Intern)
+  - NJIT / NASA (AI Engineer & Researcher)
+  - Yale University (Data Analyst)
+
+For full work history and details, please visit LinkedIn:
+  ${resumeData.personalInfo.linkedin}
+`
 }
 
 function formatProjects(projList: typeof resumeData.projects) {

@@ -163,9 +163,7 @@ export default function InteractiveTerminal() {
       if (target.tagName === 'IFRAME') return
 
       if (gameRunning) {
-        const iframe = document.querySelector(
-          'iframe[title="ASCIItron Game"]',
-        ) as HTMLIFrameElement | null
+        const iframe = document.querySelector('iframe[title="ASCIItron Game"]')
         iframe?.focus()
         return
       }

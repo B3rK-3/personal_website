@@ -12,7 +12,7 @@ export function ReadRow({ prompt, children, className = '' }: ReadRowProps) {
     <div className={`flex items-center ${className} opacity-90`}>
       {prompt && <span className="text-green-400 mr-2 shrink-0">{prompt}</span>}
       {children}
-    </div>  
+    </div>
   )
 }
 

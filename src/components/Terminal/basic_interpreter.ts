@@ -6,7 +6,7 @@
 // ============================================================
 
 /** Run a BASIC program and return its printed output lines. */
-export function runBasicProgram(source: string): string[] {
+export function runBasicProgram(source: string): Array<string> {
   const interpreter = new BasicInterpreter(source)
   interpreter.run()
   return interpreter.output
@@ -18,12 +18,12 @@ export function runBasicProgram(source: string): string[] {
 
 class BasicInterpreter {
   /** Collected PRINT output */
-  output: string[] = []
+  output: Array<string> = []
 
-  private lines: string[]
+  private lines: Array<string>
   private currentLine = 0
   private vars: Record<string, number> = {}
-  private stack: number[] = []
+  private stack: Array<number> = []
 
   constructor(source: string) {
     // Normalise line endings and split
@@ -346,7 +346,7 @@ class BasicInterpreter {
 
   private evalStringExpression(expr: string): string {
     // Split on + outside quotes and concatenate
-    const parts: string[] = []
+    const parts: Array<string> = []
     let current = ''
     let inQuote = false
 
@@ -386,8 +386,8 @@ class BasicInterpreter {
     return result
   }
 
-  private tokenize(expr: string): string[] {
-    const tokens: string[] = []
+  private tokenize(expr: string): Array<string> {
+    const tokens: Array<string> = []
     let i = 0
     const s = expr.trim()
 
@@ -448,7 +448,7 @@ class BasicInterpreter {
     return tokens
   }
 
-  private parseComparison(ctx: { pos: number; tokens: string[] }): number {
+  private parseComparison(ctx: { pos: number; tokens: Array<string> }): number {
     let left = this.parseAddSub(ctx)
     while (ctx.pos < ctx.tokens.length) {
       const op = ctx.tokens[ctx.pos]
@@ -479,7 +479,7 @@ class BasicInterpreter {
     return left
   }
 
-  private parseAddSub(ctx: { pos: number; tokens: string[] }): number {
+  private parseAddSub(ctx: { pos: number; tokens: Array<string> }): number {
     let left = this.parseMulDiv(ctx)
     while (ctx.pos < ctx.tokens.length) {
       const op = ctx.tokens[ctx.pos]
@@ -491,7 +491,7 @@ class BasicInterpreter {
     return left
   }
 
-  private parseMulDiv(ctx: { pos: number; tokens: string[] }): number {
+  private parseMulDiv(ctx: { pos: number; tokens: Array<string> }): number {
     let left = this.parseUnary(ctx)
     while (ctx.pos < ctx.tokens.length) {
       const op = ctx.tokens[ctx.pos]
@@ -505,7 +505,7 @@ class BasicInterpreter {
     return left
   }
 
-  private parseUnary(ctx: { pos: number; tokens: string[] }): number {
+  private parseUnary(ctx: { pos: number; tokens: Array<string> }): number {
     if (ctx.tokens[ctx.pos] === '-') {
       ctx.pos++
       return -this.parsePrimary(ctx)
@@ -516,7 +516,7 @@ class BasicInterpreter {
     return this.parsePrimary(ctx)
   }
 
-  private parsePrimary(ctx: { pos: number; tokens: string[] }): number {
+  private parsePrimary(ctx: { pos: number; tokens: Array<string> }): number {
     const token = ctx.tokens[ctx.pos]
     if (!token) return 0
 
@@ -563,8 +563,8 @@ class BasicInterpreter {
     return -1
   }
 
-  private splitFuncArgs(inner: string): string[] {
-    const args: string[] = []
+  private splitFuncArgs(inner: string): Array<string> {
+    const args: Array<string> = []
     let depth = 0
     let current = ''
     let inQuote = false
