@@ -11,7 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SecretLocationRouteImport } from './routes/secret-location'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppThoughtsRouteImport } from './routes/app/thoughts'
+import { Route as AppTerminalRouteImport } from './routes/app/terminal'
+import { Route as AppResearchRouteImport } from './routes/app/research'
+import { Route as AppProjectsRouteImport } from './routes/app/projects'
+import { Route as AppExperienceRouteImport } from './routes/app/experience'
+import { Route as AppThoughtsPostSlugRouteImport } from './routes/app/thoughts/post/$slug'
 
 const SecretLocationRoute = SecretLocationRouteImport.update({
   id: '/secret-location',
@@ -23,38 +31,135 @@ const PortfolioRoute = PortfolioRouteImport.update({
   path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppThoughtsRoute = AppThoughtsRouteImport.update({
+  id: '/thoughts',
+  path: '/thoughts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTerminalRoute = AppTerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResearchRoute = AppResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProjectsRoute = AppProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExperienceRoute = AppExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppThoughtsPostSlugRoute = AppThoughtsPostSlugRouteImport.update({
+  id: '/post/$slug',
+  path: '/post/$slug',
+  getParentRoute: () => AppThoughtsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
+  '/app/experience': typeof AppExperienceRoute
+  '/app/projects': typeof AppProjectsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/terminal': typeof AppTerminalRoute
+  '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
+  '/app/experience': typeof AppExperienceRoute
+  '/app/projects': typeof AppProjectsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/terminal': typeof AppTerminalRoute
+  '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/app': typeof AppIndexRoute
+  '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/secret-location': typeof SecretLocationRoute
+  '/app/experience': typeof AppExperienceRoute
+  '/app/projects': typeof AppProjectsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/terminal': typeof AppTerminalRoute
+  '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/portfolio' | '/secret-location'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/portfolio'
+    | '/secret-location'
+    | '/app/experience'
+    | '/app/projects'
+    | '/app/research'
+    | '/app/terminal'
+    | '/app/thoughts'
+    | '/app/'
+    | '/app/thoughts/post/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/portfolio' | '/secret-location'
-  id: '__root__' | '/' | '/portfolio' | '/secret-location'
+  to:
+    | '/'
+    | '/portfolio'
+    | '/secret-location'
+    | '/app/experience'
+    | '/app/projects'
+    | '/app/research'
+    | '/app/terminal'
+    | '/app/thoughts'
+    | '/app'
+    | '/app/thoughts/post/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/portfolio'
+    | '/secret-location'
+    | '/app/experience'
+    | '/app/projects'
+    | '/app/research'
+    | '/app/terminal'
+    | '/app/thoughts'
+    | '/app/'
+    | '/app/thoughts/post/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   SecretLocationRoute: typeof SecretLocationRoute
 }
@@ -75,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -82,11 +194,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/thoughts': {
+      id: '/app/thoughts'
+      path: '/thoughts'
+      fullPath: '/app/thoughts'
+      preLoaderRoute: typeof AppThoughtsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/terminal': {
+      id: '/app/terminal'
+      path: '/terminal'
+      fullPath: '/app/terminal'
+      preLoaderRoute: typeof AppTerminalRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/research': {
+      id: '/app/research'
+      path: '/research'
+      fullPath: '/app/research'
+      preLoaderRoute: typeof AppResearchRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/projects': {
+      id: '/app/projects'
+      path: '/projects'
+      fullPath: '/app/projects'
+      preLoaderRoute: typeof AppProjectsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/experience': {
+      id: '/app/experience'
+      path: '/experience'
+      fullPath: '/app/experience'
+      preLoaderRoute: typeof AppExperienceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/thoughts/post/$slug': {
+      id: '/app/thoughts/post/$slug'
+      path: '/post/$slug'
+      fullPath: '/app/thoughts/post/$slug'
+      preLoaderRoute: typeof AppThoughtsPostSlugRouteImport
+      parentRoute: typeof AppThoughtsRoute
+    }
   }
 }
 
+interface AppThoughtsRouteChildren {
+  AppThoughtsPostSlugRoute: typeof AppThoughtsPostSlugRoute
+}
+
+const AppThoughtsRouteChildren: AppThoughtsRouteChildren = {
+  AppThoughtsPostSlugRoute: AppThoughtsPostSlugRoute,
+}
+
+const AppThoughtsRouteWithChildren = AppThoughtsRoute._addFileChildren(
+  AppThoughtsRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppExperienceRoute: typeof AppExperienceRoute
+  AppProjectsRoute: typeof AppProjectsRoute
+  AppResearchRoute: typeof AppResearchRoute
+  AppTerminalRoute: typeof AppTerminalRoute
+  AppThoughtsRoute: typeof AppThoughtsRouteWithChildren
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppExperienceRoute: AppExperienceRoute,
+  AppProjectsRoute: AppProjectsRoute,
+  AppResearchRoute: AppResearchRoute,
+  AppTerminalRoute: AppTerminalRoute,
+  AppThoughtsRoute: AppThoughtsRouteWithChildren,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   SecretLocationRoute: SecretLocationRoute,
 }

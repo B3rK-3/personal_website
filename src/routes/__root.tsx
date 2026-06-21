@@ -39,7 +39,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:image',
-        content: 'https://berked.dev/image.png',
+        content: 'https://berked.dev/meta/og-image.png',
       },
       {
         property: 'og:url',
@@ -67,7 +67,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:image',
-        content: 'https://berked.dev/image.png',
+        content: 'https://berked.dev/meta/og-image.png',
       },
     ],
     links: [
@@ -89,10 +89,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
   const [loading, setLoading] = useState(() => {
     if (
+      location.pathname === '/' ||
       location.pathname === '/portfolio' ||
       location.pathname.startsWith('/portfolio') ||
       location.pathname === '/secret-location' ||
-      location.pathname.startsWith('/secret-location')
+      location.pathname.startsWith('/secret-location') ||
+      location.pathname === '/app' ||
+      location.pathname.startsWith('/app')
     ) {
       return false
     }

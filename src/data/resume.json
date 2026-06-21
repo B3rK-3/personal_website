@@ -1,16 +1,16 @@
 {
   "personalInfo": {
-    "name": "Eren Berke Dogan",
+    "name": "Eren Dogan",
     "title": "Software Engineer | AI Researcher | Full Stack Developer",
     "location": "Newark, NJ / NYC",
     "email": "erenberkedogan@gmail.com",
     "phone": "(201) 724-4539",
     "github": "https://github.com/B3rK-3",
     "linkedin": "https://www.linkedin.com/in/eren-b-dogan/",
-    "website": "berke.disent.com"
+    "website": "berked.dev"
   },
   "navLinks": {
-    "resumePdf": "/Eren_s_Resume-2.pdf"
+    "resumePdf": "/resume/Eren_s_Resume-2.pdf"
   },
   "education": [
     {
@@ -19,28 +19,30 @@
       "degree": "B.S. Computer Science",
       "startDate": "Sep 2024",
       "endDate": "May 2028",
-      "gpa": "3.94/4.0",
+      "gpa": "3.88/4.0",
       "courses": [
+        "Computer Architecture",
+        "Operating Systems",
+        "Linux & Systems Programming",
         "Data Structures & Algorithms",
+        "Computer Networks",
         "Web Development",
-        "Databases",
-        "Internet Protocols"
+        "Databases"
       ]
     }
   ],
   "experience": [
     {
       "role": "Software Engineer Intern",
-      "company": "Disent",
-      "companyType": "TriBeCa-based Startup",
+      "company": "Betterment",
+      "companyType": "Fintech",
       "location": "Remote & NYC",
-      "startDate": "Oct 2025",
+      "startDate": "Jun 2026",
       "endDate": "Present",
       "highlights": [
-        "Delivered new features and bug fixes in React + TypeScript, improving UI responsiveness and API reliability",
-        "Optimized backend endpoints and optimized REST requests, reducing average latency by 10%",
-        "Built reusable React hooks & modular components for dashboards used by 500+ users",
-        "Collaborated with designers and engineers in agile sprints, shipping weekly production updates"
+        "Engineering full-stack features with React and Ruby on Rails utilizing Claude Code to write, debug, and validate AI-generated code",
+        "Implementing A/B tests on a core sign-up screen serving 300+ daily users, increasing signup conversion by 5%",
+        "Leveraging CircleCI and GitHub Actions for CI/CD and Sentry for production monitoring and real-time debugging"
       ]
     },
     {
@@ -51,10 +53,22 @@
       "startDate": "May 2025",
       "endDate": "Present",
       "highlights": [
-        "Developed ML pipelines (LSTM) with NASA, using PyTorch & CUDA",
-        "Automated SLURM-based HPC experiments spanning 1000+ GPU hours",
-        "Engineered data preprocessing & model evaluation scripts, reducing experiment iteration time by 50%",
-        "Applied object-oriented design to modularize training, validation, and feature engineering workflows"
+        "Architected high-throughput NASA LSTM ML pipelines in C++/CUDA and Python within Linux environments, achieving 100% Probability of Detection (POD) and reducing False Alarm Rate (FAR) by 50%",
+        "Automated SLURM-based distributed computing and multi-process simulations, coordinating execution across 1,000+ GPU hours",
+        "Engineered data preprocessing and validation scripts, optimizing parallel data pipelines to shrink iteration cycles by 50%"
+      ]
+    },
+    {
+      "role": "Software Engineer Intern",
+      "company": "Disent",
+      "companyType": "TriBeCa-based Startup",
+      "location": "Remote & NYC",
+      "startDate": "Oct 2025",
+      "endDate": "Feb 2026",
+      "highlights": [
+        "Shipped a React + TypeScript web application serving 500+ active users, owning API design, database schemas, and frontend features from concept to production",
+        "Optimized backend REST endpoints, reducing API latency by 10% through performance profiling, telemetry, and debugging of high-throughput data paths",
+        "Coordinated in weekly agile sprints to manage Git workflows, code reviews, and production updates"
       ]
     },
     {
@@ -65,8 +79,7 @@
       "startDate": "Jun 2023",
       "endDate": "Sep 2024",
       "highlights": [
-        "Processed and analyzed 50+ GB neuroscience datasets in Python for reproducible scientific pipelines",
-        "Built automation scripts with Pandas/Numpy, reducing data validation time by 25%"
+        "Constructed Python data pipelines using Pandas for ingestion, cleansing, and analysis of 50+ GB scientific datasets, cutting validation time by 25%"
       ]
     }
   ],
@@ -78,45 +91,58 @@
         "Python",
         "ChromaDB",
         "CrossEncoder",
-        "Gemini API"
+        "Gemini API",
+        "React Flow"
       ],
-      "description": "Engineered an Agentic MCP server to orchestrate Gemini tool-calling for automated course scheduling. Implemented a two-stage RAG pipeline with ChromaDB and CrossEncoder for semantic re-ranking. Developed AI extraction pipeline with Pydantic validation to transform course descriptions into JSON schemas."
+      "description": "Deployed an interactive course planner (flownjit.com) serving 4,000+ active users and indexing 3,513 courses with React Flow graph visualization and automated prerequisites parsing for 1,955 courses.\nBuilt a two-stage RAG pipeline retrieving top-500 candidates via ChromaDB vector search with cross-encoder reranking for semantic course search across 163 departments.\nDesigned a Gemini 2.5 Flash AI automation workflow using LLM APIs and function-calling to generate schedules across 15,569 section entries, replacing manual planning."
     },
     {
       "name": "Fashion AI App",
-      "techStack": ["React Native", "Python", "TypeScript", "PostgreSQL"],
-      "description": "Full-stack prototype linking React Native front-end, Python backend, and SQL. Achieved 90%+ accuracy in clothing tagging using OpenCV & PyTorch. Designed LLM-powered styling engine providing instant, contextual outfit recommendations."
+      "techStack": [
+        "React Native",
+        "Python",
+        "TypeScript",
+        "SQLite",
+        "Flask",
+        "PyTorch"
+      ],
+      "description": "Developed a React Native mobile application (iOS & Android) with 5 API endpoints for garment upload, U2Net background removal, and Gemini-powered outfit chat.\nAchieved 90%+ accuracy in clothing tagging by refining CLIP ViT-B/32 computer vision pipeline with PyTorch and OpenCV preprocessing.\nCreated hybrid retrieval engine combining tag overlap, color matching, and 512-dim vector similarity to rank personalized outfit recommendations.\nMigrated database from PostgreSQL to SQLite with sqlite-vec to run vector search locally, eliminating server dependency."
     }
   ],
   "skills": {
-    "languages": ["C++", "Python", "Java", "JavaScript/TypeScript", "SQL"],
+    "languages": ["C/C++", "Java", "Python", "JavaScript/TypeScript", "Ruby", "SQL"],
     "machineLearning": [
-      "Time-series forecasting",
-      "NLP",
       "PyTorch",
       "TensorFlow",
+      "LLMs",
       "CUDA",
+      "OpenCV",
       "NumPy",
       "Pandas"
     ],
     "systemsTools": [
-      "SLURM",
       "Linux",
       "Git",
+      "CI/CD (GitHub Actions, CircleCI)",
+      "Sentry",
+      "AWS",
+      "SLURM",
+      "Distributed Computing",
+      "React",
+      "Node.js",
+      "Ruby on Rails",
       "REST APIs",
-      "CI/CD",
-      "PostgreSQL",
-      "React"
+      "PostgreSQL"
     ]
   },
   "awardsAndLeadership": [
     {
       "title": "Project Manager – NJIT Robotics Club",
-      "description": "Led a 5-person team to design a plotter robot"
+      "description": "Led a 5-person team to build a plotter robot, writing C++ firmware for microcontrollers and serial communication (UART)"
     },
     {
       "title": "Albert Dorman Honors College",
-      "description": "NJIT’s top 2% of students, awarded merit-based honors scholarship"
+      "description": "NJIT's top 2% of students, awarded merit-based honors scholarship"
     },
     {
       "title": "Publications",
@@ -124,7 +150,7 @@
     },
     {
       "title": "Co-Founder – Boost Hacks",
-      "description": "Hackathons with 2,000+ students and $392K prizes, 239 submissions"
+      "description": "Directed execution for hackathons with 2,000+ students, managing multi-disciplinary teams, $392K in sponsorships, and growth KPIs in a fast-paced environment"
     }
   ]
 }

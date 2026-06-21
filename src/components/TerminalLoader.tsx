@@ -197,10 +197,10 @@ export default function TerminalLoader({
       if (!aborted.current && mounted.current) {
         setIsVisible(false) // Trigger fade out
         if (mounted.current) {
-          // Only navigate to /portfolio if we're on the home page
+          // Only navigate to /app if we're on the home page
           const currentPath = window.location.pathname
           if (currentPath === '/' || currentPath === '') {
-            navigate({ to: '/portfolio' } as any)
+            navigate({ to: '/app' } as any)
           }
           onComplete()
         }
