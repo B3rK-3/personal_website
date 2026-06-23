@@ -9,10 +9,10 @@ export const Route = createFileRoute('/app/experience')({
 const LOGOS = [
   { src: '/logos/disent.png', alt: 'Disent' },
   { src: '/logos/nasa.png', alt: 'NASA' },
-  { src: '/logos/yale.png', alt: 'Yale' },
+  { src: '/logos/yale.png', alt: 'Yale', link: "https://cncl.yale.edu/" },
   { src: '/logos/betterment.png', alt: 'Betterment' },
-  { src: '/logos/princeton.png', alt: 'Princeton' },
-  { src: '/logos/xulab.png', alt: 'XU Lab' },
+  { src: '/logos/princeton.png', alt: 'Princeton', link: "https://spacephysics.princeton.edu/" },
+  { src: '/logos/xulab.png', alt: 'XU Lab', link: "https://gracexu182.github.io/" },
 ]
 
 function ExperiencePage() {
