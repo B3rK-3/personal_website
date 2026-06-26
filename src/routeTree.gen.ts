@@ -14,6 +14,7 @@ import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as TestsSlitscanRouteImport } from './routes/tests/slitscan'
 import { Route as AppThoughtsRouteImport } from './routes/app/thoughts'
 import { Route as AppTerminalRouteImport } from './routes/app/terminal'
 import { Route as AppResearchRouteImport } from './routes/app/research'
@@ -45,6 +46,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRoute,
+} as any)
+const TestsSlitscanRoute = TestsSlitscanRouteImport.update({
+  id: '/tests/slitscan',
+  path: '/tests/slitscan',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AppThoughtsRoute = AppThoughtsRouteImport.update({
   id: '/thoughts',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/app/research': typeof AppResearchRoute
   '/app/terminal': typeof AppTerminalRoute
   '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/tests/slitscan': typeof TestsSlitscanRoute
   '/app/': typeof AppIndexRoute
   '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/app/research': typeof AppResearchRoute
   '/app/terminal': typeof AppTerminalRoute
   '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/tests/slitscan': typeof TestsSlitscanRoute
   '/app': typeof AppIndexRoute
   '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/app/research': typeof AppResearchRoute
   '/app/terminal': typeof AppTerminalRoute
   '/app/thoughts': typeof AppThoughtsRouteWithChildren
+  '/tests/slitscan': typeof TestsSlitscanRoute
   '/app/': typeof AppIndexRoute
   '/app/thoughts/post/$slug': typeof AppThoughtsPostSlugRoute
 }
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/app/research'
     | '/app/terminal'
     | '/app/thoughts'
+    | '/tests/slitscan'
     | '/app/'
     | '/app/thoughts/post/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/app/research'
     | '/app/terminal'
     | '/app/thoughts'
+    | '/tests/slitscan'
     | '/app'
     | '/app/thoughts/post/$slug'
   id:
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/app/research'
     | '/app/terminal'
     | '/app/thoughts'
+    | '/tests/slitscan'
     | '/app/'
     | '/app/thoughts/post/$slug'
   fileRoutesById: FileRoutesById
@@ -162,6 +174,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   SecretLocationRoute: typeof SecretLocationRoute
+  TestsSlitscanRoute: typeof TestsSlitscanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/tests/slitscan': {
+      id: '/tests/slitscan'
+      path: '/tests/slitscan'
+      fullPath: '/tests/slitscan'
+      preLoaderRoute: typeof TestsSlitscanRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/app/thoughts': {
       id: '/app/thoughts'
@@ -283,16 +303,8 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   SecretLocationRoute: SecretLocationRoute,
+  TestsSlitscanRoute: TestsSlitscanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

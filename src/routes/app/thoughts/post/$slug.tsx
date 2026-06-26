@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import type { ComponentProps } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-
+import type { ComponentProps } from 'react'
 export const Route = createFileRoute('/app/thoughts/post/$slug')({
   component: ThoughtPostPage,
 })
