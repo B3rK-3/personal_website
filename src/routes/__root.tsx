@@ -1,147 +1,73 @@
-import {
-  HeadContent,
-  Scripts,
-  createRootRoute,
-  useLocation,
-} from '@tanstack/react-router'
+import { Outlet, createRootRoute, useLocation } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-
 import { useState } from 'react'
 import TerminalLoader from '../components/TerminalLoader'
 
-import appCss from '../styles.css?url'
-
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'Berke - Portfolio',
-      },
-      {
-        name: 'description',
-        content: 'this.portfolio. ps: go to /secret-location and type "play"',
-      },
-      {
-        property: 'og:title',
-        content: 'Berked - Portfolio',
-      },
-      {
-        property: 'og:description',
-        content: 'this.portfolio. ps: go to /secret-location and type "play"',
-      },
-      {
-        property: 'og:image',
-        content: 'https://berked.dev/meta/og-image.png',
-      },
-      {
-        property: 'og:url',
-        content: 'https://berked.dev',
-      },
-      {
-        property: 'og:type',
-        content: 'website',
-      },
-      {
-        name: 'twitter:card',
-        content: 'summary_large_image',
-      },
-      {
-        name: 'twitter:url',
-        content: 'https://berked.dev',
-      },
-      {
-        name: 'twitter:title',
-        content: 'Berked - Portfolio',
-      },
-      {
-        name: 'twitter:description',
-        content: 'this.portfolio. ps: go to /secret-location and type "play"',
-      },
-      {
-        name: 'twitter:image',
-        content: 'https://berked.dev/meta/og-image.png',
-      },
-    ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
-      {
-        rel: 'icon',
-        href: 'https://berked.dev/favicon.ico',
-      },
-    ],
-  }),
-  shellComponent: RootDocument,
+  component: RootComponent,
 })
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function checkLoading(pathname: string, search: unknown): boolean {
+  if (
+    pathname === '/' ||
+    pathname === '/portfolio' ||
+    pathname.startsWith('/portfolio') ||
+    pathname === '/secret-location' ||
+    pathname.startsWith('/secret-location') ||
+    pathname === '/app' ||
+    pathname.startsWith('/app') ||
+    pathname === '/tests' ||
+    pathname.startsWith('/tests')
+  ) {
+    return false
+  }
+
+  if (typeof window !== 'undefined') {
+    const searchParams = new URLSearchParams(window.location.search)
+    if (searchParams.get('bypass') === '1') {
+      return false
+    }
+  }
+
+  if (
+    search &&
+    typeof search === 'object' &&
+    'bypass' in search &&
+    search.bypass === '1'
+  ) {
+    return false
+  }
+
+  return true
+}
+
+function RootComponent() {
   const location = useLocation()
-
-  const [loading, setLoading] = useState(() => {
-    if (
-      location.pathname === '/' ||
-      location.pathname === '/portfolio' ||
-      location.pathname.startsWith('/portfolio') ||
-      location.pathname === '/secret-location' ||
-      location.pathname.startsWith('/secret-location') ||
-      location.pathname === '/app' ||
-      location.pathname.startsWith('/app')
-    ) {
-      return false
-    }
-
-    // Only run on client for search params if needed, or use location.search if schema is known
-    // For now, client-side check for bypass ensures functionality there
-    if (typeof window !== 'undefined') {
-      const searchParams = new URLSearchParams(window.location.search)
-      if (searchParams.get('bypass') === '1') {
-        return false
-      }
-    }
-
-    // Check if location.search has bypass (if available on server context)
-    // Note: location.search is typically an object in TanStack Router
-    if ((location.search as any)?.bypass === '1') {
-      return false
-    }
-
-    return true
-  })
+  const [loading, setLoading] = useState(() =>
+    checkLoading(location.pathname, location.search),
+  )
 
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body className="bg-black text-white min-h-screen overflow-x-hidden">
-        {loading ? (
-          <TerminalLoader onComplete={() => setLoading(false)} />
-        ) : (
-          <div className="bg-black min-h-screen">{children}</div>
-        )}
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-        <Scripts />
-      </body>
-    </html>
+    <>
+      {loading ? (
+        <TerminalLoader onComplete={() => setLoading(false)} />
+      ) : (
+        <div className="bg-black min-h-screen">
+          <Outlet />
+        </div>
+      )}
+      <TanStackDevtools
+        config={{
+          position: 'bottom-right',
+        }}
+        plugins={[
+          {
+            name: 'Tanstack Router',
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+        ]}
+      />
+    </>
   )
 }
